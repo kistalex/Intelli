@@ -11,13 +11,19 @@ import UIKit
 
 class BannerCell: UICollectionViewCell {
     
-    private var maxWidthConstraint: NSLayoutConstraint!
-    
-    
-    private func setupMaxWidthConstraint() {
-        maxWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: 1000)
-        maxWidthConstraint.isActive = false
+    private enum Constants{
+        static let iconSize: CGFloat = 52
+        static let viewMargin: CGFloat = 10
+        static let imageSize: CGFloat = 40
+        static let titleLabelFontSize: CGFloat = 26
+        static let descriptionLabelFontSize: CGFloat = 18
+        static let priceLabelFontSize: CGFloat = 20
     }
+    
+    
+    //MARK: - Properties
+    
+    let checkMarkImageView = CustomImageView(image: UIImage(systemName: "checkmark.circle.fill"), tintColor: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), contentMode: .scaleAspectFit, translatesAutoresizingMaskIntoConstraints: false)
     
     var maxWidth: CGFloat? = nil {
         didSet {
@@ -29,53 +35,18 @@ class BannerCell: UICollectionViewCell {
         }
     }
     
-    let bannerIconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
     
-    let bannerTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 26, weight: .bold)
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let bannerDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let bannerPriceLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let checkMarkImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "checkmark.circle.fill")
-        imageView.tintColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    private var stackView: UIStackView!
+    func configure(with dataResult: List){
+        networkService.loadFrom(urlAddress: dataResult.icon.the52X52) { [weak self] image in
+            DispatchQueue.main.async {
+                self?.iconImageView.image = image
+            }
+        }
+        titleLabel.text = dataResult.title
+        descriptionLabel.text = dataResult.description
+        priceLabel.text = dataResult.price
+        checkMarkImageView.isHidden = !dataResult.isSelected
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,24 +57,39 @@ class BannerCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with dataResult: List){
-        bannerIconImageView.loadFrom(URLAddress: dataResult.icon.the52X52)
-        bannerTitleLabel.text = dataResult.title
-        bannerDescriptionLabel.text = dataResult.description
-        bannerPriceLabel.text = dataResult.price
-    }
+    //MARK: - Private properties
     
+    private let networkService = NetworkService()
+    
+    private var maxWidthConstraint: NSLayoutConstraint!
+    
+    private let iconImageView = CustomImageView(contentMode: .scaleAspectFit, translatesAutoresizingMaskIntoConstraints: false)
+    
+    private let titleLabel = CustomLabel(font: UIFont.systemFont(ofSize: Constants.titleLabelFontSize, weight: .bold), numberOfLines: 0, lineBreakMode: .byWordWrapping, textColor: .black, translatesAutoresizingMaskIntoConstraints: false)
+    
+    private let descriptionLabel = CustomLabel(font: UIFont.systemFont(ofSize: Constants.descriptionLabelFontSize), numberOfLines: 0, lineBreakMode: .byWordWrapping, textColor: .black, translatesAutoresizingMaskIntoConstraints: false)
+    
+    private let priceLabel = CustomLabel(font: UIFont.systemFont(ofSize: Constants.priceLabelFontSize, weight: .bold), numberOfLines: 0, lineBreakMode: .byWordWrapping, textColor: .black, translatesAutoresizingMaskIntoConstraints: false)
+    
+    private var stackView: UIStackView!
+       
+    //MARK: - Private Methods
+    
+    private func setupMaxWidthConstraint() {
+        maxWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: 1000)
+        maxWidthConstraint.isActive = false
+    }
     
     private func setupUI(){
         contentView.backgroundColor = .systemGray6
         
-        stackView = UIStackView(arrangedSubviews: [bannerTitleLabel, bannerDescriptionLabel, bannerPriceLabel])
+        stackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel, priceLabel])
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stackView)
         
-        contentView.addSubview(bannerIconImageView)
+        contentView.addSubview(iconImageView)
         contentView.addSubview(checkMarkImageView)
         
         setupMaxWidthConstraint()
@@ -112,27 +98,30 @@ class BannerCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         
         NSLayoutConstraint.activate([
-            bannerIconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            bannerIconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            bannerIconImageView.widthAnchor.constraint(equalToConstant: 52),
-            bannerIconImageView.heightAnchor.constraint(equalToConstant: 52)
+            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.viewMargin),
+            iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.viewMargin),
+            iconImageView.widthAnchor.constraint(equalToConstant: Constants.iconSize),
+            iconImageView.heightAnchor.constraint(equalToConstant: Constants.iconSize)
         ])
         
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: bannerIconImageView.trailingAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.viewMargin),
         ])
         
         NSLayoutConstraint.activate(([
-            checkMarkImageView.centerYAnchor.constraint(equalTo: bannerIconImageView.centerYAnchor),
+            checkMarkImageView.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor),
             checkMarkImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            checkMarkImageView.widthAnchor.constraint(equalToConstant: 40),
-            checkMarkImageView.heightAnchor.constraint(equalToConstant: 40),
+            checkMarkImageView.widthAnchor.constraint(equalToConstant: Constants.imageSize),
+            checkMarkImageView.heightAnchor.constraint(equalToConstant: Constants.imageSize),
         ]))
         
         NSLayoutConstraint.activate([
-            contentView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10)
+            contentView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: Constants.viewMargin)
         ])
     }
 }
+
+
+

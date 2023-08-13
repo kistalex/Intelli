@@ -9,22 +9,29 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class PromotionViewController: UIViewController {
     
     
     
-    private var headerLabel = UILabel()
-    private var bannersCollectionView : UICollectionView!
+    //MARK: - Private properties
+    
+    private enum Constants{
+        static let viewMargin: CGFloat = 20
+        static let headerLabelFontSize: CGFloat = 32
+       
+    }
+    
+    private let headerLabel = UILabel()
     private var selectedIndexPaths = Set<IndexPath>()
-    private var sizingCell = BannerCell()
+    private let dataService = DataService()
     
-    
-    var bannerData: BannerData?
+    private var bannersCollectionView : UICollectionView!
+    private var bannerData: BannerData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        fetchBannerData()
+        fetchBannerData(forFileName: "data")
         setupHeaderLabel()
         setupBannersCollectionView()
         
@@ -34,30 +41,30 @@ class ViewController: UIViewController {
         
         headerLabel.text = bannerData?.result.title
         headerLabel.numberOfLines = 2
-        headerLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        headerLabel.font = UIFont.systemFont(ofSize: Constants.headerLabelFontSize, weight: .bold)
         
         
         view.addSubview(headerLabel)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            headerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.viewMargin),
+            headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.viewMargin),
+            headerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.viewMargin),
             
         ])
         
     }
     
-    private func fetchBannerData(){
-        if let path = Bundle.main.path(forResource: "data", ofType: "json") {
-            do {
-                let jsonData = try Data(contentsOf: URL(fileURLWithPath: path))
-                let decoder = JSONDecoder()
-                bannerData = try decoder.decode(BannerData.self, from: jsonData)
-            } catch {
-                print("Ошибка при декодировании JSON: \(error)")
+    private func fetchBannerData(forFileName fileName: String){
+        dataService.fetchBannerData(fromFileNamed: fileName) { [weak self] result  in
+            switch result{
+            case .success(let bannerData):
+                self?.bannerData = bannerData
+            case .failure(let error):
+                print("Ошибка чтения json: \(error)")
             }
         }
+        
     }
     
     private func setupBannersCollectionView(){
@@ -71,7 +78,7 @@ class ViewController: UIViewController {
         view.addSubview(bannersCollectionView)
         bannersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            bannersCollectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 20),
+            bannersCollectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: Constants.viewMargin),
             bannersCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             bannersCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             bannersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -79,7 +86,6 @@ class ViewController: UIViewController {
         
         bannersCollectionView.dataSource = self
         bannersCollectionView.delegate = self
-        bannersCollectionView.reloadData()
     }
     
     private func setupFlowLayout() -> UICollectionViewFlowLayout{
@@ -91,7 +97,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension PromotionViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return bannerData?.result.list.count ?? 0
     }
@@ -106,17 +112,26 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         let isSelected = selectedIndexPaths.contains(indexPath)
         cell.checkMarkImageView.isHidden = !isSelected
+       
+        
         cell.maxWidth = bannersCollectionView.bounds.width - 20
         
         return cell
     }
-    
+}
+
+extension PromotionViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedIndexPaths.contains(indexPath) {
             selectedIndexPaths.remove(indexPath)
         } else {
             selectedIndexPaths.insert(indexPath)
         }
+
+//        if let dataResult = bannerData?.result.list[indexPath.item]{
+//            dataResult.isSelected.toggle()
+//        }
+        
         bannersCollectionView.reloadItems(at: [indexPath])
     }
 }

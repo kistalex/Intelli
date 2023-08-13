@@ -9,14 +9,18 @@
 /* Begin PBXBuildFile section */
 		4637336B2A78171A00156650 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637336A2A78171A00156650 /* AppDelegate.swift */; };
 		4637336D2A78171A00156650 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637336C2A78171A00156650 /* SceneDelegate.swift */; };
-		4637336F2A78171A00156650 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637336E2A78171A00156650 /* ViewController.swift */; };
+		4637336F2A78171A00156650 /* PromotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637336E2A78171A00156650 /* PromotionViewController.swift */; };
 		463733722A78171A00156650 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 463733702A78171A00156650 /* Main.storyboard */; };
 		463733742A78171B00156650 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 463733732A78171B00156650 /* Assets.xcassets */; };
 		463733772A78171B00156650 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 463733752A78171B00156650 /* LaunchScreen.storyboard */; };
 		4637337F2A7D593C00156650 /* BannerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637337E2A7D593C00156650 /* BannerData.swift */; };
 		463733812A7D59F300156650 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 463733802A7D59F300156650 /* data.json */; };
 		463733852A7D6E6F00156650 /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463733842A7D6E6F00156650 /* BannerCell.swift */; };
-		463733872A8017CA00156650 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463733862A8017CA00156650 /* Extensions.swift */; };
+		463733872A8017CA00156650 /* Extension+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463733862A8017CA00156650 /* Extension+UIImageView.swift */; };
+		4637338A2A84198200156650 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463733892A84198200156650 /* CustomLabel.swift */; };
+		4637338C2A84206B00156650 /* CustomUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637338B2A84206B00156650 /* CustomUIImageView.swift */; };
+		4637338E2A8696F000156650 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637338D2A8696F000156650 /* NetworkService.swift */; };
+		463733902A86A9B900156650 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637338F2A86A9B900156650 /* DataService.swift */; };
 		80D6CA9A987416C7B9687EE0 /* Pods_Intelli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268848B34E0EF8C07DFAA249 /* Pods_Intelli.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +30,7 @@
 		463733672A78171A00156650 /* Intelli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Intelli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4637336A2A78171A00156650 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4637336C2A78171A00156650 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4637336E2A78171A00156650 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4637336E2A78171A00156650 /* PromotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionViewController.swift; sourceTree = "<group>"; };
 		463733712A78171A00156650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		463733732A78171B00156650 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		463733762A78171B00156650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -34,7 +38,11 @@
 		4637337E2A7D593C00156650 /* BannerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerData.swift; sourceTree = "<group>"; };
 		463733802A7D59F300156650 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		463733842A7D6E6F00156650 /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
-		463733862A8017CA00156650 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		463733862A8017CA00156650 /* Extension+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImageView.swift"; sourceTree = "<group>"; };
+		463733892A84198200156650 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		4637338B2A84206B00156650 /* CustomUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIImageView.swift; sourceTree = "<group>"; };
+		4637338D2A8696F000156650 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		4637338F2A86A9B900156650 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		540A097F59ED61C749E4A38D /* Pods-Intelli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Intelli.debug.xcconfig"; path = "Target Support Files/Pods-Intelli/Pods-Intelli.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,10 +89,12 @@
 			children = (
 				4637336A2A78171A00156650 /* AppDelegate.swift */,
 				4637336C2A78171A00156650 /* SceneDelegate.swift */,
-				4637336E2A78171A00156650 /* ViewController.swift */,
-				4637337E2A7D593C00156650 /* BannerData.swift */,
+				4637336E2A78171A00156650 /* PromotionViewController.swift */,
 				463733842A7D6E6F00156650 /* BannerCell.swift */,
-				463733862A8017CA00156650 /* Extensions.swift */,
+				463733922A86A9D200156650 /* Models */,
+				463733912A86A9BC00156650 /* Services */,
+				463733882A84194F00156650 /* Views */,
+				463733932A86A9DF00156650 /* Extensions */,
 				463733702A78171A00156650 /* Main.storyboard */,
 				463733732A78171B00156650 /* Assets.xcassets */,
 				463733752A78171B00156650 /* LaunchScreen.storyboard */,
@@ -94,13 +104,46 @@
 			path = Intelli;
 			sourceTree = "<group>";
 		};
+		463733882A84194F00156650 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				463733892A84198200156650 /* CustomLabel.swift */,
+				4637338B2A84206B00156650 /* CustomUIImageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		463733912A86A9BC00156650 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4637338D2A8696F000156650 /* NetworkService.swift */,
+				4637338F2A86A9B900156650 /* DataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		463733922A86A9D200156650 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4637337E2A7D593C00156650 /* BannerData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		463733932A86A9DF00156650 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				463733862A8017CA00156650 /* Extension+UIImageView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B4B17B58823095DED858E9E3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				540A097F59ED61C749E4A38D /* Pods-Intelli.debug.xcconfig */,
 				18375810A0DA8785F197A3F5 /* Pods-Intelli.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -115,6 +158,7 @@
 				463733632A78171A00156650 /* Sources */,
 				463733642A78171A00156650 /* Frameworks */,
 				463733652A78171A00156650 /* Resources */,
+				1A6B81319A707605AC0CA73A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,6 +217,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1A6B81319A707605AC0CA73A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Intelli/Pods-Intelli-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Intelli/Pods-Intelli-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Intelli/Pods-Intelli-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5ADDBD4CB9B3014CBE5BCB5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,12 +263,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4637336F2A78171A00156650 /* ViewController.swift in Sources */,
-				463733872A8017CA00156650 /* Extensions.swift in Sources */,
+				4637336F2A78171A00156650 /* PromotionViewController.swift in Sources */,
+				4637338C2A84206B00156650 /* CustomUIImageView.swift in Sources */,
+				463733872A8017CA00156650 /* Extension+UIImageView.swift in Sources */,
 				463733852A7D6E6F00156650 /* BannerCell.swift in Sources */,
+				4637338E2A8696F000156650 /* NetworkService.swift in Sources */,
+				4637338A2A84198200156650 /* CustomLabel.swift in Sources */,
 				4637336B2A78171A00156650 /* AppDelegate.swift in Sources */,
 				4637336D2A78171A00156650 /* SceneDelegate.swift in Sources */,
 				4637337F2A7D593C00156650 /* BannerData.swift in Sources */,
+				463733902A86A9B900156650 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +433,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = app.Intelli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -397,6 +463,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = app.Intelli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -10,8 +10,8 @@
 import UIKit
 
 extension UIImageView {
-    func loadFrom(URLAddress: String) {
-        guard let url = URL(string: URLAddress) else {
+    func loadFrom(urlAddress: String) {
+        guard let url = URL(string: urlAddress) else {
             return
         }
         
